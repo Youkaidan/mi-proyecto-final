@@ -20,7 +20,6 @@ class Desarrollador(models.Model):
     anno_fundacion = models.CharField(max_length=30, default='')
 
 class Noticias(models.Model):
-    titulo = models.CharField(max_length=100, default='')
-    sub_titulo = models.CharField(max_length=80, default='')
-    contenido = models.CharField(max_length=300, default='')
-    fecha = models.CharField(max_length=30, default='')
+    titulo = models.CharField(max_length=60)
+    sub_titulo = models.CharField(max_length=60)
+    contenido = models.CharField(max_length=200)
