@@ -13,7 +13,7 @@ Juego(nombre_juego="Cyberpunk 2077",
 desarrollador="CD Projekt Red", 
 genero="Disparos/Rol", 
 cantidad_jugadores="Un jugador", 
-reseña="La historia sigue la lucha de V mientras lidia con un misterioso implante cibernético que amenaza con sobrescribir su cuerpo con la personalidad y los recuerdos de una celebridad fallecida que solo V percibe; los dos deben trabajar juntos si hay alguna esperanza de separarlos y salvar la vida de V.").save()
+resena="La historia sigue la lucha de V mientras lidia con un misterioso implante cibernético que amenaza con sobrescribir su cuerpo con la personalidad y los recuerdos de una celebridad fallecida que solo V percibe; los dos deben trabajar juntos si hay alguna esperanza de separarlos y salvar la vida de V.").save()
 
 Desarrollador(nombre_desarrollador="CD Projekt Red", 
 pais="Polonia", 
