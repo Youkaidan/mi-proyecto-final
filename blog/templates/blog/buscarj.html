@@ -1,0 +1,40 @@
+
+{% extends 'blog/base.html' %}
+
+{% block contenido %}
+
+        <!-- Page content-->
+        <div class="container">
+            <div class="row">
+                <!-- Blog entries-->
+                <div class="col-lg-8">
+                    <!-- Featured blog post-->
+                    <div class="card mb-4">
+                        <!--<a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>-->
+                        <div class="card-body">
+                            <div class="small text-muted">Resultado de busqueda:</div>
+                            {% for juego in lista_juegos %}
+                            <h2 class="card-title">Reseña de: {{juego.nombre_juego}}</h2>
+                            {% endfor %}
+                            
+                            {% for juego in lista_juegos %}
+                            <ul>
+                                <li> Nombre: {{juego.nombre_juego}} </li>
+                                <li> Desarrollador: {{juego.desarrollador}} </li>
+                                <li> Género: {{juego.genero}} </li>
+                                <li> Cant. Jugadores: {{juego.cantidad_jugadores}} </li>
+                                <li> Reseña: {{juego.resena}} </li>
+                            </ul>
+                            {% endfor %}
+
+                            <!--<a class="btn btn-primary" href="#!">Read more →</a>-->
+                        </div>
+                    </div>
+
+                    <!-- Nested row for non-featured blog posts-->
+                                    
+                </div>
+
+{% endblock %}
+
+ 

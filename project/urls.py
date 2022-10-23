@@ -18,7 +18,7 @@ from django.urls import path
 from ejemplo.views import (index, index_tres, imc, 
                            monstrar_familiares, BuscarFamiliar, AltaFamiliar)
 from blog.views import index as blog_index                           
-from blog.views import InsertJuego, InsertDesarrollador, InsertNoticias
+from blog.views import InsertJuego, InsertDesarrollador, InsertNoticias, BuscarJuego
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,5 +33,6 @@ urlpatterns = [
     path('blog/juego_insert', InsertJuego.as_view()) ,
     path('blog/desarrollador_insert', InsertDesarrollador.as_view()) ,
     path('blog/noticias_insert', InsertNoticias.as_view()) ,
+    path('blog/buscarj', BuscarJuego.as_view()),
     
 ]

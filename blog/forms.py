@@ -1,8 +1,8 @@
 from django import forms
 from blog.models import Juego, Desarrollador, Noticias
 
-class Buscar(forms.Form):
-  nombre = forms.CharField(max_length=100)
+class BuscarJ(forms.Form):
+  nombre_juego = forms.CharField(max_length=30)
 
 class JuegoForm(forms.ModelForm):
   class Meta:

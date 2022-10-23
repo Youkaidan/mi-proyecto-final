@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from django.views import View 
 from blog.models import Configuracion, Juego, Desarrollador, Noticias
-from blog.forms import Buscar ,JuegoForm, DesarrolladorForm, NoticiasForm
+from blog.forms import BuscarJ ,JuegoForm, DesarrolladorForm, NoticiasForm
 
 def index(request):
     configuracion = Configuracion.objects.first()
     ultimo_juego = Juego.objects.last()
-    return render(request, 'blog/index.html', {'configuracion': configuracion, 'ultimo_juego': ultimo_juego})
+    ultima_noticia = Noticias.objects.last()
+    return render(request, 'blog/index.html', {'configuracion': configuracion
+                                                ,'ultimo_juego': ultimo_juego
+                                                ,'ultima_noticia': ultima_noticia})
     
 class InsertJuego(View):
 
@@ -100,3 +103,35 @@ class InsertNoticias(View):
                                                         ,'ultimo_juego': ultimo_juego})
         
         return render(request, self.template_name, {"form": form})        
+
+
+class BuscarJuego(View):
+
+    form_class = BuscarJ
+    template_name = 'blog/buscarj.html'
+    initial = {"nombre_juego":""}
+
+    def get(self, request):
+        configuracion = Configuracion.objects.first()
+        ultimo_juego = Juego.objects.last()       
+
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form':form
+                                                    ,'configuracion': configuracion
+                                                    ,'ultimo_juego': ultimo_juego})
+
+    def post(self, request):
+        configuracion = Configuracion.objects.first()
+        ultimo_juego = Juego.objects.last()
+
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            nombre_juego = form.cleaned_data.get("nombre_juego")
+            lista_juegos = Juego.objects.filter(nombre_juego__icontains=nombre_juego).all() 
+            form = self.form_class(initial=self.initial)
+            return render(request, self.template_name, {'form':form
+                                                        ,'lista_juegos':lista_juegos
+                                                        ,'configuracion': configuracion
+                                                        ,'ultimo_juego': ultimo_juego})
+
+        return render(request, self.template_name, {"form": form})          
