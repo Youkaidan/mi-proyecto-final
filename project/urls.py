@@ -14,9 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from ejemplo.views import (index, index_tres, imc, 
-                           monstrar_familiares, BuscarFamiliar, AltaFamiliar)
+from django.urls import path, include
+from ejemplo.views import (index, index_tres, imc, monstrar_familiares
+                            ,BuscarFamiliar, AltaFamiliar, FamiliarList, FamiliarCrear, FamiliarBorrar, FamiliarActualizar)
 from blog.views import index as blog_index                           
 from blog.views import InsertJuego, InsertDesarrollador, InsertNoticias, BuscarJuego
 
@@ -28,11 +28,12 @@ urlpatterns = [
     path('mi-familia/', monstrar_familiares), 
     path('mi-familia/buscar', BuscarFamiliar.as_view()), # clase 20 form
     path('mi-familia/alta', AltaFamiliar.as_view()), # clase 21
+    path('panel-familia/', FamiliarList.as_view(), name="familiar-list"), #clase 22
+    path('panel-familia/crear', FamiliarCrear.as_view(), name="familiar-crear"), #clase 22
+    path('panel-familia/<int:pk>/borrar', FamiliarBorrar.as_view(), name="familiar-borrar"), #clase 22
+    path('panel-familia/<int:pk>/actualizar', FamiliarActualizar.as_view(), name="familiar-actualizar"),
 
-    path('blog/', blog_index), #URLS DE PROYECTO FINAL
-    path('blog/juego_insert', InsertJuego.as_view()) ,
-    path('blog/desarrollador_insert', InsertDesarrollador.as_view()) ,
-    path('blog/noticias_insert', InsertNoticias.as_view()) ,
-    path('blog/buscarj', BuscarJuego.as_view()),
+    #BLOG - PROYECTO FINAL
+    path('blog/', include('blog.urls')),
     
 ]

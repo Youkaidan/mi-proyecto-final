@@ -2,6 +2,7 @@ from django.shortcuts import render
 from ejemplo.models import Familiar
 from ejemplo.forms import Buscar ,FamiliarForm # <--- CLASE 20 FORM y 21
 from django.views import View # <-- CLASE 20 FORM
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView    # <----- CLASE 22
 
 def index(request):
     return render(request, "ejemplo/saludar.html", {"nombre":"Erwin"})
@@ -62,3 +63,20 @@ class AltaFamiliar(View):
                                                         'msg_exito': msg_exito})
         
         return render(request, self.template_name, {"form": form})
+        
+class FamiliarList(ListView):
+  model = Familiar        
+
+class FamiliarCrear(CreateView):
+  model = Familiar
+  success_url = "/panel-familia"
+  fields = ["nombre", "direccion", "numero_pasaporte"]     
+
+class FamiliarBorrar(DeleteView):
+  model = Familiar
+  success_url = "/panel-familia"    
+
+class FamiliarActualizar(UpdateView):
+  model = Familiar
+  success_url = "/panel-familia"
+  fields = ["nombre", "direccion", "numero_pasaporte"]    
