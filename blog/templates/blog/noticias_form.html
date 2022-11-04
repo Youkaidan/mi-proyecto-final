@@ -16,7 +16,8 @@
                             <form method="post">
                                 {% csrf_token %}
                                 {{form.as_p}}
-                                <input type="submit" value="Publish">
+                                <!--<input type="submit" value="Publish">-->
+                                <input type="submit" value="Ingresar" class="btn btn-primary" >
                             </form>
                         
                             <a href="{% url 'list-noticia' %}">Volver a la lista de noticias</a>

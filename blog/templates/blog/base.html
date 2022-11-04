@@ -45,28 +45,6 @@
 
                 <!-- Side widgets-->
                 <div class="col-lg-4">
-                    <!-- Search widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Buscar juego</div>
-                        <div class="card-body">
-                            <div class="input-group">
-
-                                <form action="/blog/buscarj" method="post">
-                                {% csrf_token %}
-                                <input class="form-control" type="text" placeholder="Nombre de juego..." aria-label="Nombre de juego..." aria-describedby="button-search" 
-                                name="nombre_juego" maxlength="30" required id="id_nombre_juego"/>
-                                <br>
-                                <button class="btn btn-primary" id="button-search" type="submit">Buscar!</button>
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Side widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Último juego ingresado</div>
-                        <div class="card-body">{{ultimo_juego.nombre_juego}}</div>
-                    </div>
 
                     <!-- Search widget 2-->
                     <div class="card mb-4">
@@ -85,6 +63,30 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Search widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Buscar juego</div>
+                        <div class="card-body">
+                            <div class="input-group">
+
+                                <form action="/blog/buscarj" method="post">
+                                {% csrf_token %}
+                                <input class="form-control" type="text" placeholder="Nombre de juego..." aria-label="Nombre de juego..." aria-describedby="button-search" 
+                                name="nombre_juego" maxlength="30" required id="id_nombre_juego"/>
+                                <br>
+                                <button class="btn btn-primary" id="button-search" type="submit">Buscar!</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Side widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Último juego ingresado</div>
+                        <div class="card-body">{{ultimo_juego.nombre_juego}}</div>
+                    </div>
                     
                     <!-- Categories widget-->
                     <div class="card mb-4">
@@ -93,9 +95,9 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
+                                        <li><a href="{% url 'create-noticia'%}">Noticias</a></li>
                                         <li><a href="/blog/juego_insert">Juegos</a></li>
-                                        <li><a href="/blog/desarrollador_insert">Desarrollador</a></li>
-                                        <li><a href="/blog/noticias_insert">Noticias</a></li>
+                                        <li><a href="/blog/desarrollador_insert">Desarrollador</a></li>                                        
                                     </ul>
                                 </div>
                                 <div class="col-sm-6">
