@@ -70,7 +70,8 @@ class FamiliarList(ListView):
 class FamiliarCrear(CreateView):
   model = Familiar
   success_url = "/panel-familia"
-  fields = ["nombre", "direccion", "numero_pasaporte"]     
+  fields = ["nombre", "direccion", "numero_pasaporte"]  
+  #reverse lazy para volver   
 
 class FamiliarBorrar(DeleteView):
   model = Familiar

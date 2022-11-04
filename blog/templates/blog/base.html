@@ -67,6 +67,25 @@
                         <div class="card-header">Último juego ingresado</div>
                         <div class="card-body">{{ultimo_juego.nombre_juego}}</div>
                     </div>
+
+                    <!-- Search widget 2-->
+                    <div class="card mb-4">
+                        <div class="card-header">Buscar noticia</div>
+                        <div class="card-body">
+                            <div class="input-group">
+
+                                <form action="{% url 'search-by-name-noticia' %}" method="get">
+                                {% csrf_token %}
+                                <input class="form-control" type="text" placeholder="Título de noticia..." aria-label="Título de noticia..." aria-describedby="button-search" 
+                                name="titulo" maxlength="100" required id="id_titulo"/>
+                                <br>
+                                <button class="btn btn-primary" id="button-search" type="submit">Buscar!</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- Categories widget-->
                     <div class="card mb-4">
                         <div class="card-header">Insertar contenido</div>

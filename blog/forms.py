@@ -17,4 +17,4 @@ class DesarrolladorForm(forms.ModelForm):
 class NoticiasForm(forms.ModelForm):
   class Meta:
     model = Noticias
-    fields = ['titulo', 'sub_titulo', 'contenido', 'fecha']    
+    fields = ['titulo', 'sub_titulo', 'contenido']    

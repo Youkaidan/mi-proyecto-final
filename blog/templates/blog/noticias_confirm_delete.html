@@ -1,0 +1,32 @@
+
+{% extends 'blog/base.html' %}
+
+{% block contenido %}
+
+        <!-- Page content-->
+        <div class="container">
+            <div class="row">
+                <!-- Blog entries-->
+                <div class="col-lg-8">
+                    <!-- Featured blog post-->
+                    <div class="card mb-4">
+                        <a href="#!"><img class="card-img-top" src="https://cl.buscafs.com/www.levelup.com/public/uploads/images/767162/767162_1140x516.jpg" alt="..." /></a>
+                        <div class="card-body">
+                       
+                            ¿Está seguro de borrar el post {{noticia.titulo}}? 
+                            <form method="post">
+                                {% csrf_token %}
+                                {{form}}
+                                <input type="submit" value="si">
+                            </form>
+                        
+                            <a href="{% url 'list-noticia' %}">Volver a la lista de noticias</a>
+
+                        </div>
+                    </div>
+
+                    <!-- Nested row for non-featured blog posts-->
+                                    
+                </div>
+
+{% endblock %}
