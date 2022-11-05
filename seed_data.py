@@ -22,8 +22,7 @@ Familiar(nombre="Erwin", direccion="Calle uno 222", numero_pasaporte=654321).sav
 
 #Noticias(titulo="CD Projekt Red festeja", 
 #sub_titulo="Cyberpunk 2077 llegó al millón de jugadores diarios en el último mes", 
-#contenido="El estudio polaco celebró el hito en redes sociales y le agradeció a todos los jugadores que le han brindado su apoyo.",
-#fecha="21/10/2022").save()
+#contenido="El estudio polaco celebró el hito en redes sociales y le agradeció a todos los jugadores que le han brindado su apoyo.").save()
 
 
 print("Se cargo con éxito la data base")
