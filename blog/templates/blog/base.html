@@ -21,7 +21,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/blog">Home</a></li>
-                        <!--<li class="nav-item"><a class="nav-link" href="#!">About</a></li>-->
+                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                         <!--<li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>-->
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/blog">Blog</a></li>
                     </ul>
@@ -45,6 +45,25 @@
 
                 <!-- Side widgets-->
                 <div class="col-lg-4">
+
+                    <!-- Search widget 2-->
+                    <div class="card mb-4">
+                        <div class="card-header">Buscar noticia</div>
+                        <div class="card-body">
+                            <div class="input-group">
+
+                                <form action="{% url 'search-by-name-noticia' %}" method="get">
+                                {% csrf_token %}
+                                <input class="form-control" type="text" placeholder="Título de noticia..." aria-label="Título de noticia..." aria-describedby="button-search" 
+                                name="titulo" maxlength="100" required id="id_titulo"/>
+                                <br>
+                                <button class="btn btn-primary" id="button-search" type="submit">Buscar!</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Search widget-->
                     <div class="card mb-4">
                         <div class="card-header">Buscar juego</div>
@@ -62,11 +81,13 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- Side widget-->
                     <div class="card mb-4">
                         <div class="card-header">Último juego ingresado</div>
                         <div class="card-body">{{ultimo_juego.nombre_juego}}</div>
                     </div>
+                    
                     <!-- Categories widget-->
                     <div class="card mb-4">
                         <div class="card-header">Insertar contenido</div>
@@ -74,9 +95,9 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
+                                        <li><a href="{% url 'create-noticia'%}">Noticias</a></li>
                                         <li><a href="/blog/juego_insert">Juegos</a></li>
-                                        <li><a href="/blog/desarrollador_insert">Desarrollador</a></li>
-                                        <li><a href="/blog/noticias_insert">Noticias</a></li>
+                                        <li><a href="/blog/desarrollador_insert">Desarrollador</a></li>                                        
                                     </ul>
                                 </div>
                                 <div class="col-sm-6">

@@ -1,8 +1,12 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import View 
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 from blog.models import Configuracion, Juego, Desarrollador, Noticias
 from blog.forms import BuscarJ ,JuegoForm, DesarrolladorForm, NoticiasForm
 
+
+#@login_required
 def index(request):
     configuracion = Configuracion.objects.first()
     ultimo_juego = Juego.objects.last()
@@ -10,7 +14,7 @@ def index(request):
     return render(request, 'blog/index.html', {'configuracion': configuracion
                                                 ,'ultimo_juego': ultimo_juego
                                                 ,'ultima_noticia': ultima_noticia})
-    
+
 class InsertJuego(View):
 
     form_class = JuegoForm
@@ -77,7 +81,7 @@ class InsertNoticias(View):
     
     form_class = NoticiasForm
     template_name = 'blog/noticias_insert.html'
-    initial = {"titulo":"", "sub_titulo":"", "contenido":"", "fecha":""}
+    initial = {"titulo":"", "sub_titulo":"", "contenido":""}
 
     def get(self, request):
         configuracion = Configuracion.objects.first()
@@ -135,3 +139,66 @@ class BuscarJuego(View):
                                                         ,'ultimo_juego': ultimo_juego})
 
         return render(request, self.template_name, {"form": form})          
+
+##V2 CON GENERIC VIEWS
+
+class ListNoticia(ListView):
+    model=Noticias
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['configuracion'] = Configuracion.objects.first()
+        context['ultimo_juego'] = Juego.objects.last()
+        return context
+
+class CreateNoticia(CreateView):
+    model=Noticias
+    fields = ['titulo', 'sub_titulo', 'contenido']
+    success_url = reverse_lazy("list-noticia")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['configuracion'] = Configuracion.objects.first()
+        context['ultimo_juego'] = Juego.objects.last()
+        return context
+
+class DetailNoticia(DetailView):
+    model=Noticias
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['configuracion'] = Configuracion.objects.first()
+        context['ultimo_juego'] = Juego.objects.last()
+        return context    
+
+class UpdateNoticia(UpdateView):
+    model=Noticias
+    fields=['titulo', 'sub_titulo', 'contenido']
+    success_url = reverse_lazy("list-noticia")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['configuracion'] = Configuracion.objects.first()
+        context['ultimo_juego'] = Juego.objects.last()
+        return context    
+
+class DeleteNoticia(DeleteView):
+    model=Noticias
+    success_url = reverse_lazy("list-noticia")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['configuracion'] = Configuracion.objects.first()
+        context['ultimo_juego'] = Juego.objects.last()
+        return context    
+
+class SearchNoticiaByName(ListView):
+    def get_queryset(self):
+        blog_titulo = self.request.GET.get('titulo')
+        return Noticias.objects.filter(titulo__icontains=blog_titulo)     
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['configuracion'] = Configuracion.objects.first()
+        context['ultimo_juego'] = Juego.objects.last()
+        return context           
