@@ -6,7 +6,7 @@ from blog.views import *
 #URLS DE PROYECTO FINAL
 
 urlpatterns = [
-    path('', blog_index), 
+    path('', blog_index, name="index-blog"), 
     path('juego_insert', InsertJuego.as_view()) ,
     path('desarrollador_insert', InsertDesarrollador.as_view()) ,
     path('buscarj', BuscarJuego.as_view()),
@@ -17,4 +17,6 @@ urlpatterns = [
     path('update/<int:pk>/', UpdateNoticia.as_view(), name="update-noticia"),
     path('delete/<int:pk>', DeleteNoticia.as_view(), name="delete-noticia"),
     path('search-by-name-/', SearchNoticiaByName.as_view(), name="search-by-name-noticia"),
+    path('login/', BlogLogin.as_view(), name="blog-login"),
+    path('logout/', BlogLogout.as_view(), name="blog-logout"),    
 ]

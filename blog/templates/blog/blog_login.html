@@ -13,16 +13,14 @@
                         <a href="#!"><img height="200" class="card-img-top" src="../../static/banner.png" alt="..." /></a>
                         <div class="card-body">
                        
-                            <ul>
-                            {% for noticia in object_list %}
-                                <li>{{noticia}} 
-                                    <a href="{% url 'delete-noticia' noticia.id  %}">Borrar</a>
-                                    <a href="{% url 'update-noticia' noticia.id  %}">Actulizar</a>
-                                </li>
-                            {% endfor %}
-                            </ul>
-                        
-                            <a class="btn-primary" href="{% url 'create-noticia'%}">Crear nueva noticia</a>
+                            <h1>Login del Blog</h1>
+
+                            <form method="POST">
+                                {% csrf_token %}
+                                {{form.as_p}}
+                                <button class="btn btn-primary" type="submit">Login</button>
+                            </form>
+                            <!-- <a href="">create an account</a> -->
 
                         </div>
                     </div>

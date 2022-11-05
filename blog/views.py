@@ -1,3 +1,6 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View 
@@ -142,7 +145,7 @@ class BuscarJuego(View):
 
 ##V2 CON GENERIC VIEWS
 
-class ListNoticia(ListView):
+class ListNoticia(LoginRequiredMixin, ListView):
     model=Noticias
 
     def get_context_data(self, **kwargs):
@@ -151,7 +154,7 @@ class ListNoticia(ListView):
         context['ultimo_juego'] = Juego.objects.last()
         return context
 
-class CreateNoticia(CreateView):
+class CreateNoticia(LoginRequiredMixin, CreateView):
     model=Noticias
     fields = ['titulo', 'sub_titulo', 'contenido']
     success_url = reverse_lazy("list-noticia")
@@ -202,3 +205,10 @@ class SearchNoticiaByName(ListView):
         context['configuracion'] = Configuracion.objects.first()
         context['ultimo_juego'] = Juego.objects.last()
         return context           
+
+class BlogLogin(LoginView):
+    template_name = 'blog/blog_login.html'
+    next_page = reverse_lazy("list-noticia")
+
+class BlogLogout(LogoutView):
+    template_name = 'blog/blog_logout.html'        

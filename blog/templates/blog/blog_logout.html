@@ -13,16 +13,9 @@
                         <a href="#!"><img height="200" class="card-img-top" src="../../static/banner.png" alt="..." /></a>
                         <div class="card-body">
                        
-                            <ul>
-                            {% for noticia in object_list %}
-                                <li>{{noticia}} 
-                                    <a href="{% url 'delete-noticia' noticia.id  %}">Borrar</a>
-                                    <a href="{% url 'update-noticia' noticia.id  %}">Actulizar</a>
-                                </li>
-                            {% endfor %}
-                            </ul>
-                        
-                            <a class="btn-primary" href="{% url 'create-noticia'%}">Crear nueva noticia</a>
+                            <h1>Logout del Blog</h1>
+
+                            <a class="btn-primary" href="{% url 'index-blog' %}">ir al index</a>
 
                         </div>
                     </div>
