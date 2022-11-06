@@ -9,21 +9,23 @@
         <div class="col-lg-8">
             <!-- Post content-->
             <article>
+
                 <!-- Post header-->
                 <header class="mb-4">
                     <!-- Post title-->
-                    <h1 class="fw-bolder mb-1">Welcome to Blog Post!</h1>
+                    <h1 class="fw-bolder mb-1">{{object.titulo}}</h1>
                     <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2">Posted on January 1, 2022 by Start Bootstrap</div>
+                    <div class="text-muted fst-italic mb-2">Publicado: {{object.fecha}}</div>
                     <!-- Post categories-->
-                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Noticias</a>
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">PlayStation</a>
                 </header>
+
                 <!-- Preview image figure-->
                 {% if object.imagen.url is not null %}
                 <figure class="mb-4"><img class="img-fluid rounded" src="{{ object.imagen.url }}" alt="..." /></figure>
                 {% else %}
-                <p class="badge bg-secondary text-decoration-none ">No existe imagen cargada en ésta noticia</p>
+                <p class="badge bg-secondary text-decoration-none ">No existe imagen en ésta noticia</p>
                 {% endif %}
                 <!-- Post content-->
                 <section class="mb-5">
@@ -37,9 +39,13 @@
                     <p class="fs-5 mb-4">Venus has a runaway greenhouse effect. I kind of want to know what happened there because we're twirling knobs here on Earth without knowing the consequences of it. Mars once had running water. It's bone dry today. Something bad happened there as well.</p>
                     -->
 
-                    {{object}}
-                               
+                    <p class="fs-5 mb-4"> {{object.sub_titulo}} </p>
+                    <ul></ul>
+                    <h2 class="fw-bolder mb-4 mt-5">___________________________________</h2>
+                    <p class="fs-5 mb-4"> {{object.contenido}} </p>
+                                     
                 </section>
+
             </article>
             <!-- Comments section-->
             

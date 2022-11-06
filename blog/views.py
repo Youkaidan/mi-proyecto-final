@@ -16,9 +16,11 @@ def index(request):
     configuracion = Configuracion.objects.first()
     ultimo_juego = Juego.objects.last()
     ultima_noticia = Noticias.objects.last()
+    noticias = Noticias.objects.order_by('-fecha').all()
     return render(request, 'blog/index.html', {'configuracion': configuracion
                                                 ,'ultimo_juego': ultimo_juego
-                                                ,'ultima_noticia': ultima_noticia})
+                                                ,'ultima_noticia': ultima_noticia
+                                                ,'Noticias': noticias})
 
 class InsertJuego(View):
 
@@ -147,80 +149,52 @@ class BuscarJuego(View):
 
 ##V2 CON GENERIC VIEWS
 
-class ListNoticia(LoginRequiredMixin, ListView):
-    model=Noticias
-
+##Contexto base para heredar en vistas
+class CommonMixinExample(object):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['configuracion'] = Configuracion.objects.first()
         context['ultimo_juego'] = Juego.objects.last()
         return context
 
-class CreateNoticia(LoginRequiredMixin, CreateView):
+class ListNoticia(CommonMixinExample, ListView):
+    model=Noticias    
+
+class CreateNoticia(LoginRequiredMixin, CommonMixinExample, CreateView):
     model=Noticias
     fields = ['titulo', 'sub_titulo', 'contenido', 'imagen']
     success_url = reverse_lazy("list-noticia")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['configuracion'] = Configuracion.objects.first()
-        context['ultimo_juego'] = Juego.objects.last()
-        return context
-
-class DetailNoticia(DetailView):
+class DetailNoticia(CommonMixinExample, DetailView):
     model=Noticias
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['configuracion'] = Configuracion.objects.first()
-        context['ultimo_juego'] = Juego.objects.last()
-        return context    
-
-class UpdateNoticia(UpdateView):
+class UpdateNoticia(CommonMixinExample, UpdateView):
     model=Noticias
     fields=['titulo', 'sub_titulo', 'contenido', 'imagen']
     success_url = reverse_lazy("list-noticia")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['configuracion'] = Configuracion.objects.first()
-        context['ultimo_juego'] = Juego.objects.last()
-        return context    
-
-class DeleteNoticia(DeleteView):
+class DeleteNoticia(CommonMixinExample, DeleteView):
     model=Noticias
     success_url = reverse_lazy("list-noticia")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['configuracion'] = Configuracion.objects.first()
-        context['ultimo_juego'] = Juego.objects.last()
-        return context    
-
-class SearchNoticiaByName(ListView):
+class SearchNoticiaByName(CommonMixinExample, ListView):
     def get_queryset(self):
         blog_titulo = self.request.GET.get('titulo')
         return Noticias.objects.filter(titulo__icontains=blog_titulo)     
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['configuracion'] = Configuracion.objects.first()
-        context['ultimo_juego'] = Juego.objects.last()
-        return context           
-
-class BlogLogin(LoginView):
+ 
+class BlogLogin(CommonMixinExample, LoginView):
     template_name = 'blog/blog_login.html'
     next_page = reverse_lazy("index-blog")
 
-class BlogLogout(LogoutView):
-    template_name = 'blog/blog_logout.html'        
+class BlogLogout(CommonMixinExample, LogoutView):
+    template_name = 'blog/blog_logout.html'     
 
-class BlogSignUp(CreateView):
+class BlogSignUp(CommonMixinExample, CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy("blog-login")
     template_name = "registration/signup.html"
 
-class ProfileUpdate(UpdateView):
+class ProfileUpdate(CommonMixinExample, UpdateView):
     model = User
     fields = ['username']
     success_url = reverse_lazy("index-blog")    

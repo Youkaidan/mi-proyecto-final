@@ -12,18 +12,24 @@
                     <div class="card mb-4">
                         <a href="#!"><img height="200" class="card-img-top" src="../../static/banner.png" alt="..." /></a>
                         <div class="card-body">
-                       
+                        <h2>Noticias:</h2>
                             <ul>
                             {% for noticia in object_list %}
-                                <li>{{noticia}} 
+                                <li>{{noticia.titulo}} 
+                                    {% if user.is_authenticated %}
                                     <a href="{% url 'detail-noticia' noticia.id  %}">Ver</a>
                                     <a href="{% url 'delete-noticia' noticia.id  %}">Borrar</a>
-                                    <a href="{% url 'update-noticia' noticia.id  %}">Actulizar</a>
+                                    <a href="{% url 'update-noticia' noticia.id  %}">Actualizar</a>                                   
+                                    {% else %}
+                                    <a href="{% url 'detail-noticia' noticia.id  %}">Ver</a>
+                                    {% endif %}
                                 </li>
                             {% endfor %}
                             </ul>
-                        
+                            
+                            {% if user.is_authenticated %}
                             <a class="btn-primary" href="{% url 'create-noticia'%}">Crear nueva noticia</a>
+                            {% endif %}
 
                         </div>
                     </div>

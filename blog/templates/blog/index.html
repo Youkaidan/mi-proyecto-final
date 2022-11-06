@@ -10,18 +10,19 @@
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
                     <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top" src="https://cl.buscafs.com/www.levelup.com/public/uploads/images/767162/767162_1140x516.jpg" alt="..." /></a>
+                        <a href="#!"><img class="card-img-top" src="{{ ultima_noticia.imagen.url }}" alt="..." /></a>
                         <div class="card-body">
                             <div class="small text-muted">{{ultima_noticia.fecha}}</div>
                             <h2 class="card-title">{{ultima_noticia.titulo}}</h2>
-                            <p class="card-text">{{ultima_noticia.contenido}}</p>
-                            <!--<a class="btn btn-primary" href="#!">Read more →</a>-->
+                            <p class="card-text">{{ultima_noticia.sub_titulo}}</p>
+                            <a class="btn btn-primary" href="{% url 'detail-noticia' ultima_noticia.id %}">Leer noticia →</a>
                         </div>
                     </div>
 
                     <!-- Nested row for non-featured blog posts-->
                                     
                 </div>
+
 
 {% endblock %}
 

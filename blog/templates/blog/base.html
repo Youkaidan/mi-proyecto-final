@@ -38,7 +38,7 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/blog">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/blog/login">Usuario</a></li>
+                        <!--<li class="nav-item"><a class="nav-link" href="/blog/login">Usuario</a></li>-->
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/blog">Blog</a></li>
                     </ul>
                 </div>
@@ -122,20 +122,25 @@
                     
                     <!-- Categories widget-->
                     <div class="card mb-4">
-                        <div class="card-header">Gestión de contenido</div>
+                        <div class="card-header">Menú de contenido:</div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
                                         <b><h5>Noticias:</h5></b>
+                                        {% if user.is_authenticated %}
                                         <li><a href="{% url 'create-noticia'%}">Ingresar Noticia</a></li>
+                                        {% else %}
                                         <li><a href="{% url 'list-noticia'%}">Listar Noticias</a></li>
+                                        {% endif %}                                        
                                     </ul>  
                                     <br>                                  
                                     <ul class="list-unstyled mb-0">
+                                        {% if user.is_authenticated %}
                                         <b><h5>Otros:</h5></b>
                                         <li><a href="/blog/juego_insert">Ingresar juego</a></li>
-                                        <li><a href="/blog/desarrollador_insert">Ingresar desarrollador</a></li>                                        
+                                        <li><a href="/blog/desarrollador_insert">Ingresar desarrollador</a></li>     
+                                        {% endif %}                                     
                                     </ul>
                                 </div>
                                 <div class="col-sm-6">
