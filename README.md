@@ -37,5 +37,9 @@ python manage.py shell < seed_data.py
 
 ![index](/buscar_juego.png)
 
+# VIDEO FUNCIONALIDADES
+
+[![Alt text](https://img.youtube.com/vi/VSv0oUKahfM/0.jpg)](https://www.youtube.com/watch?v=VSv0oUKahfM)
+
 ***Desarrollado por: Erwin Orellana.-***
 ***Noviembre/2022***
