@@ -22,6 +22,12 @@ def index(request):
                                                 ,'ultima_noticia': ultima_noticia
                                                 ,'Noticias': noticias})
 
+def about(request):
+    configuracion = Configuracion.objects.first()
+    ultimo_juego = Juego.objects.last()
+    return render(request, 'blog/about.html', {'configuracion': configuracion
+                                                ,'ultimo_juego': ultimo_juego} )                                                
+
 class InsertJuego(View):
 
     form_class = JuegoForm
@@ -158,23 +164,23 @@ class CommonMixinExample(object):
         return context
 
 class ListNoticia(CommonMixinExample, ListView):
-    model=Noticias    
+    model = Noticias    
 
 class CreateNoticia(LoginRequiredMixin, CommonMixinExample, CreateView):
-    model=Noticias
+    model = Noticias
     fields = ['titulo', 'sub_titulo', 'contenido', 'imagen']
     success_url = reverse_lazy("list-noticia")
 
 class DetailNoticia(CommonMixinExample, DetailView):
-    model=Noticias
+    model = Noticias
 
 class UpdateNoticia(CommonMixinExample, UpdateView):
-    model=Noticias
-    fields=['titulo', 'sub_titulo', 'contenido', 'imagen']
+    model = Noticias
+    fields = ['titulo', 'sub_titulo', 'contenido', 'imagen']
     success_url = reverse_lazy("list-noticia")
 
 class DeleteNoticia(CommonMixinExample, DeleteView):
-    model=Noticias
+    model = Noticias
     success_url = reverse_lazy("list-noticia")
 
 class SearchNoticiaByName(CommonMixinExample, ListView):
@@ -196,6 +202,6 @@ class BlogSignUp(CommonMixinExample, CreateView):
 
 class ProfileUpdate(CommonMixinExample, UpdateView):
     model = User
-    fields = ['username']
+    fields = ['username', 'first_name', 'last_name', 'email']
     success_url = reverse_lazy("index-blog")    
     template_name = 'blog/user_form.html'   

@@ -12,6 +12,8 @@ urlpatterns = [
     path('desarrollador_insert', InsertDesarrollador.as_view()) ,
     path('buscarj', BuscarJuego.as_view()),
 
+    path('about/', about, name="index-about"), 
+
     path('list/', ListNoticia.as_view(), name="list-noticia"),
     path('create/', CreateNoticia.as_view(), name="create-noticia"),
     path('detail/<int:pk>/', DetailNoticia.as_view(), name="detail-noticia"),
