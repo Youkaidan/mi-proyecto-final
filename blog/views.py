@@ -28,7 +28,7 @@ def about(request):
     return render(request, 'blog/about.html', {'configuracion': configuracion
                                                 ,'ultimo_juego': ultimo_juego} )                                                
 
-class InsertJuego(View):
+class InsertJuego(LoginRequiredMixin, View):
 
     form_class = JuegoForm
     template_name = 'blog/juego_insert.html'
@@ -59,7 +59,7 @@ class InsertJuego(View):
         
         return render(request, self.template_name, {"form": form})
 
-class InsertDesarrollador(View):
+class InsertDesarrollador(LoginRequiredMixin, View):
 
     form_class = DesarrolladorForm
     template_name = 'blog/desarrollador_insert.html'
@@ -90,7 +90,7 @@ class InsertDesarrollador(View):
         
         return render(request, self.template_name, {"form": form})
 
-class InsertNoticias(View):
+class InsertNoticias(LoginRequiredMixin, View):
     
     form_class = NoticiasForm
     template_name = 'blog/noticias_insert.html'
@@ -174,12 +174,12 @@ class CreateNoticia(LoginRequiredMixin, CommonMixinExample, CreateView):
 class DetailNoticia(CommonMixinExample, DetailView):
     model = Noticias
 
-class UpdateNoticia(CommonMixinExample, UpdateView):
+class UpdateNoticia(LoginRequiredMixin, CommonMixinExample, UpdateView):
     model = Noticias
     fields = ['titulo', 'sub_titulo', 'contenido', 'imagen']
     success_url = reverse_lazy("list-noticia")
 
-class DeleteNoticia(CommonMixinExample, DeleteView):
+class DeleteNoticia(LoginRequiredMixin, CommonMixinExample, DeleteView):
     model = Noticias
     success_url = reverse_lazy("list-noticia")
 
@@ -195,12 +195,12 @@ class BlogLogin(CommonMixinExample, LoginView):
 class BlogLogout(CommonMixinExample, LogoutView):
     template_name = 'blog/blog_logout.html'     
 
-class BlogSignUp(CommonMixinExample, CreateView):
+class BlogSignUp(LoginRequiredMixin, CommonMixinExample, CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy("blog-login")
     template_name = "registration/signup.html"
 
-class ProfileUpdate(CommonMixinExample, UpdateView):
+class ProfileUpdate(LoginRequiredMixin, CommonMixinExample, UpdateView):
     model = User
     fields = ['username', 'first_name', 'last_name', 'email']
     success_url = reverse_lazy("index-blog")    
