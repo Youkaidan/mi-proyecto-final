@@ -12,19 +12,19 @@
                     <div class="card mb-4">
                         <a href="#!"><img height="200" class="card-img-top" src="../../static/banner.png" alt="..." /></a>
                         <div class="card-body">
+
+                            <h2>Actualizar usuario:</h2>
                        
-                            <form enctype='multipart/form-data' method="post">
+                            <form method="post">
                                 {% csrf_token %}
                                 {{form.as_p}}
                                 <!--<input type="submit" value="Publish">-->
-                                <input type="submit" value="Ingresar" class="btn btn-primary" >
+                                <input type="submit" value="Guardar" class="btn btn-primary" >
                             </form>
-                        
-                            <a href="{% url 'list-noticia' %}">Volver a la lista de noticias</a>
 
                         </div>
                     </div>
-             
+
                     <!-- Nested row for non-featured blog posts-->
                                     
                 </div>

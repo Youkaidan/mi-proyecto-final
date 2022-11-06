@@ -7,6 +7,7 @@ from blog.views import *
 
 urlpatterns = [
     path('', blog_index, name="index-blog"), 
+    path('index/', blog_index, name="index-blog"), 
     path('juego_insert', InsertJuego.as_view()) ,
     path('desarrollador_insert', InsertDesarrollador.as_view()) ,
     path('buscarj', BuscarJuego.as_view()),
@@ -19,4 +20,6 @@ urlpatterns = [
     path('search-by-name-/', SearchNoticiaByName.as_view(), name="search-by-name-noticia"),
     path('login/', BlogLogin.as_view(), name="blog-login"),
     path('logout/', BlogLogout.as_view(), name="blog-logout"),    
+    path('signup/', BlogSignUp.as_view(), name="blog-signup"),
+    path('user-profile/<int:pk>', ProfileUpdate.as_view(), name="profile-update"),
 ]

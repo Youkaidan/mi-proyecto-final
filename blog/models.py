@@ -24,6 +24,7 @@ class Noticias(models.Model):
     sub_titulo = models.CharField(max_length=255, default='')
     contenido = models.CharField(max_length=3000, default='')
     fecha = models.DateTimeField(auto_now_add=True)
+    imagen = models.ImageField(upload_to="noticias", null=True, blank=True)
 
     def __str__(self):
         return f"id:{self.id}, title:{self.titulo}"

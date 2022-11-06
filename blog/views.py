@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.admin import User
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View 
@@ -156,7 +158,7 @@ class ListNoticia(LoginRequiredMixin, ListView):
 
 class CreateNoticia(LoginRequiredMixin, CreateView):
     model=Noticias
-    fields = ['titulo', 'sub_titulo', 'contenido']
+    fields = ['titulo', 'sub_titulo', 'contenido', 'imagen']
     success_url = reverse_lazy("list-noticia")
 
     def get_context_data(self, **kwargs):
@@ -176,7 +178,7 @@ class DetailNoticia(DetailView):
 
 class UpdateNoticia(UpdateView):
     model=Noticias
-    fields=['titulo', 'sub_titulo', 'contenido']
+    fields=['titulo', 'sub_titulo', 'contenido', 'imagen']
     success_url = reverse_lazy("list-noticia")
 
     def get_context_data(self, **kwargs):
@@ -208,7 +210,18 @@ class SearchNoticiaByName(ListView):
 
 class BlogLogin(LoginView):
     template_name = 'blog/blog_login.html'
-    next_page = reverse_lazy("list-noticia")
+    next_page = reverse_lazy("index-blog")
 
 class BlogLogout(LogoutView):
     template_name = 'blog/blog_logout.html'        
+
+class BlogSignUp(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy("blog-login")
+    template_name = "registration/signup.html"
+
+class ProfileUpdate(UpdateView):
+    model = User
+    fields = ['username']
+    success_url = reverse_lazy("index-blog")    
+    template_name = 'blog/user_form.html'   

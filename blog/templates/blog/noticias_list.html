@@ -16,6 +16,7 @@
                             <ul>
                             {% for noticia in object_list %}
                                 <li>{{noticia}} 
+                                    <a href="{% url 'detail-noticia' noticia.id  %}">Ver</a>
                                     <a href="{% url 'delete-noticia' noticia.id  %}">Borrar</a>
                                     <a href="{% url 'update-noticia' noticia.id  %}">Actulizar</a>
                                 </li>
